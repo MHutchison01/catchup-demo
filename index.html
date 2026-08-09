@@ -6,51 +6,66 @@
 <title>Catch Up — free time, shown. Plans, made.</title>
 <meta name="description" content="Catch Up shows your circles when everyone is genuinely free — and turns the overlap into a plan with one nudge. Try the live demo.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 300'><circle cx='290' cy='150' r='100' fill='none' stroke='%23FF6B4A' stroke-width='28'/><circle cx='170' cy='150' r='100' fill='none' stroke='%2312A594' stroke-width='28'/><path d='M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z' fill='%236C5CE7'/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --teal:#12A594; --teal-deep:#0B7568; --coral:#FF6B4A; --violet:#6C5CE7;
   --gold:#F0A81E; --ink:#14231D; --paper:#F4F6F0; --muted:#5C6B63;
   --line:#E2E7DD; --card:#FFFFFF;
 }
+@media (prefers-color-scheme:dark){ :root{ --ink:#F2F5EE; --paper:#0F1512; --card:#18201B; --muted:#97A69B; --line:#26302A; --teal-deep:#4FD0BD; } }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,-apple-system,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh}
-.wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:56px;align-items:center;justify-content:center;min-height:100vh}
-.copy{flex:1;padding:48px 0}
-.mark{display:flex;align-items:center;gap:12px;margin-bottom:34px}
-.mark b{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep)}
-h1{font-family:Fraunces,Georgia,serif;font-size:52px;font-weight:600;line-height:1.08;letter-spacing:-.01em;margin:14px 0 18px}
+body{font-family:"Inter",-apple-system,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;gap:56px;align-items:center;justify-content:center;min-height:calc(100vh - 58px)}
+.copy{flex:1;padding:40px 0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep)}
+h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(38px,5vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.01em;margin:14px 0 18px}
 .sub{font-size:16.5px;color:var(--muted);line-height:1.6;max-width:430px}
 .points{margin-top:28px;display:flex;flex-direction:column;gap:12px}
 .point{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.5;color:var(--ink);max-width:430px}
 .dot{width:8px;height:8px;border-radius:99px;margin-top:6px;flex-shrink:0}
 .hint{margin-top:34px;display:inline-flex;align-items:center;gap:9px;background:#E9E6FB;border:1px solid #D8D2F5;color:#4B3DC9;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:600}
-.foot{margin-top:18px;font-size:12.5px;color:#AEB8AF;line-height:1.6}
-.phone-col{flex:none;padding:24px 0;display:flex;align-items:center}
-.bezel{height:min(852px,calc(100vh - 48px));aspect-ratio:393/852;width:auto;max-width:393px;background:var(--card);border-radius:54px;border:1px solid #D8DED4;box-shadow:0 40px 80px -40px rgba(20,35,29,.45), inset 0 0 0 5px #FFFFFF;position:relative;overflow:hidden}
+.foot{margin-top:18px;font-size:12.5px;color:var(--muted);opacity:.85;line-height:1.6}
+.phone-col{flex:none;padding:20px 0;display:flex;align-items:center}
+.bezel{height:min(852px,calc(100vh - 58px - 44px));aspect-ratio:393/852;width:auto;max-width:393px;background:#FFFFFF;border-radius:54px;border:1px solid #D8DED4;box-shadow:0 40px 80px -40px rgba(20,35,29,.45), inset 0 0 0 5px #FFFFFF;position:relative;overflow:hidden}
 .island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:118px;height:32px;background:#0B0F0C;border-radius:18px;z-index:5}
 .bezel iframe{width:100%;height:100%;border:0;display:block}
 @media (max-width:900px){
   .wrap{display:block;padding:0;max-width:none;min-height:0}
-  .copy{padding:26px 22px 10px}
-  h1{font-size:34px}
-  .phone-col{padding:8px 0 0}
-  .bezel{width:100%;height:82vh;border-radius:0;border:none;box-shadow:none}
+  .copy{padding:24px 22px 8px}
+  .phone-col{padding:6px 0 0}
+  .bezel{width:100%;height:80vh;border-radius:0;border:none;box-shadow:none}
   .island{display:none}
   .foot{padding-bottom:26px}
 }
+
+/* ---- shared top nav ---- */
+:root{ --nav-bg:rgba(244,246,240,.82); --nav-line:#e2e7dd; --nav-ink:#14231d; --nav-muted:#5c6b63; }
+@media (prefers-color-scheme:dark){ :root{ --nav-bg:rgba(15,21,18,.82); --nav-line:#26302a; --nav-ink:#f2f5ee; --nav-muted:#97a69b; } }
+.topnav{ position:sticky; top:0; z-index:100; display:flex; align-items:center; gap:20px; height:58px; padding:0 22px; background:var(--nav-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--nav-line); }
+.nb-brand{ display:flex; align-items:center; gap:9px; text-decoration:none; flex:none; }
+.nb-brand b{ font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:16px; letter-spacing:-.01em; color:var(--nav-ink); }
+.nb-tabs{ display:flex; align-items:stretch; height:100%; margin-left:4px; overflow-x:auto; scrollbar-width:none; }
+.nb-tabs::-webkit-scrollbar{ display:none; }
+.nb-tab{ position:relative; display:flex; align-items:center; height:100%; padding:0 14px; white-space:nowrap; text-decoration:none; font-family:"Inter",-apple-system,sans-serif; font-size:14px; font-weight:500; color:var(--nav-muted); transition:color .15s ease; }
+.nb-tab:hover{ color:var(--nav-ink); }
+.nb-tab.is-active{ color:var(--nav-ink); font-weight:600; }
+.nb-tab.is-active::after{ content:""; position:absolute; left:12px; right:12px; bottom:0; height:2px; border-radius:2px 2px 0 0; background:#6C5CE7; }
+.nb-tab:focus-visible{ outline:2px solid #6C5CE7; outline-offset:-4px; border-radius:8px; }
+@media (max-width:560px){ .nb-brand b{ display:none; } .nb-tab{ padding:0 11px; font-size:13.5px; } }
 </style>
 </head>
 <body>
+<nav class="topnav">
+  <a class="nb-brand" href="./" aria-label="Catch Up home"><svg width="30" height="20" viewBox="0 0 460 300" aria-hidden="true"><circle cx="290" cy="150" r="100" fill="none" stroke="#FF6B4A" stroke-width="28"/><circle cx="170" cy="150" r="100" fill="none" stroke="#12A594" stroke-width="28"/><path d="M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z" fill="#6C5CE7"/></svg><b>Catch up.</b></a>
+  <div class="nb-tabs">
+    <a class="nb-tab is-active" href="./" aria-current="page">Home</a>
+    <a class="nb-tab" href="./pipeline.html">Product pipeline</a>
+    <a class="nb-tab" href="./research.html">Product research</a>
+  </div>
+</nav>
 <div class="wrap">
   <div class="copy">
-    <div class="mark">
-      <svg width="42" height="27" viewBox="0 0 460 300"><circle cx="290" cy="150" r="100" fill="none" stroke="#FF6B4A" stroke-width="28"/><circle cx="170" cy="150" r="100" fill="none" stroke="#12A594" stroke-width="28"/><path d="M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z" fill="#6C5CE7"/></svg>
-      <b>Catch up.</b>
-    </div>
     <div class="eyebrow">Interactive demo</div>
     <h1>Free time, shown.<br>Plans, made.</h1>
     <p class="sub">Catch Up shows your circles when everyone is <em>genuinely</em> free — painted from calendars, never polled — and turns the overlap into a plan with one nudge.</p>
@@ -60,7 +75,7 @@ h1{font-family:Fraunces,Georgia,serif;font-size:52px;font-weight:600;line-height
       <div class="point"><span class="dot" style="background:var(--coral)"></span><span><b>A no is silent.</b> Declines are never shown, never counted, never chased.</span></div>
     </div>
     <div class="hint">Use the phone → tap through the real app</div>
-    <p class="foot">Runs entirely in your browser on demo data — nothing is stored.<br>Sign in with <b style="color:#5C6B63">0400 000 000</b> · code <b style="color:#5C6B63">123 456</b>.<br>The real app is on TestFlight for iPhone.</p>
+    <p class="foot">Runs entirely in your browser on demo data — nothing is stored.<br>Sign in with <b>0400 000 000</b> · code <b>123 456</b>.<br>The real app is on TestFlight for iPhone.</p>
   </div>
   <div class="phone-col">
     <div class="bezel">

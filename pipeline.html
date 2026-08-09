@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catch Up — Product pipeline</title>
+<meta name="description" content="The Catch Up product roadmap: 20 features across three build waves, a brand-craft track, and where the value becomes revenue.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 300'><circle cx='290' cy='150' r='100' fill='none' stroke='%23FF6B4A' stroke-width='28'/><circle cx='170' cy='150' r='100' fill='none' stroke='%2312A594' stroke-width='28'/><path d='M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z' fill='%236C5CE7'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f6f0;
+    --card: #ffffff;
+    --ink: #14231d;
+    --muted: #5c6b63;
+    --faint: #8a978d;
+    --line: #e2e7dd;
+    --line-soft: #eaeee6;
+    --teal: #0b7568;
+    --teal-bright: #12a594;
+    --coral: #d94f2e;
+    --violet: #5a4bd6;
+    --violet-ink: #4b3dc9;
+    --gold: #b87709;
+    --tint-violet: #ece9fb;
+    --tint-teal: #dcf2ee;
+    --tint-gold: #fcedc9;
+    --shadow: 0 1px 0 rgba(20, 35, 29, 0.04), 0 18px 40px -30px rgba(20, 35, 29, 0.5);
+
+    --serif: "Fraunces", "Hoefler Text", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0f1512;
+      --card: #18201b;
+      --ink: #f2f5ee;
+      --muted: #97a69b;
+      --faint: #6a786e;
+      --line: #26302a;
+      --line-soft: #212a24;
+      --teal: #4fd0bd;
+      --teal-bright: #17c2ae;
+      --coral: #ff7e5f;
+      --violet: #9b8ef5;
+      --violet-ink: #b9aff7;
+      --gold: #e8b84b;
+      --tint-violet: #241f42;
+      --tint-teal: #14312b;
+      --tint-gold: #33290f;
+      --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 20px 44px -30px rgba(0, 0, 0, 0.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1512;
+    --card: #18201b;
+    --ink: #f2f5ee;
+    --muted: #97a69b;
+    --faint: #6a786e;
+    --line: #26302a;
+    --line-soft: #212a24;
+    --teal: #4fd0bd;
+    --teal-bright: #17c2ae;
+    --coral: #ff7e5f;
+    --violet: #9b8ef5;
+    --violet-ink: #b9aff7;
+    --gold: #e8b84b;
+    --tint-violet: #241f42;
+    --tint-teal: #14312b;
+    --tint-gold: #33290f;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 20px 44px -30px rgba(0, 0, 0, 0.8);
+  }
+  :root[data-theme="light"] {
+    --paper: #f4f6f0;
+    --card: #ffffff;
+    --ink: #14231d;
+    --muted: #5c6b63;
+    --faint: #8a978d;
+    --line: #e2e7dd;
+    --line-soft: #eaeee6;
+    --teal: #0b7568;
+    --teal-bright: #12a594;
+    --coral: #d94f2e;
+    --violet: #5a4bd6;
+    --violet-ink: #4b3dc9;
+    --gold: #b87709;
+    --tint-violet: #ece9fb;
+    --tint-teal: #dcf2ee;
+    --tint-gold: #fcedc9;
+    --shadow: 0 1px 0 rgba(20, 35, 29, 0.04), 0 18px 40px -30px rgba(20, 35, 29, 0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  /* ---- header ---- */
+  header { padding: 30px 0 30px; }
+  .brand { display: flex; align-items: center; gap: 11px; margin-bottom: 40px; }
+  .brand span {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 14px 0 0;
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: clamp(16px, 2.2vw, 19px);
+    color: var(--muted);
+    max-width: 62ch;
+    margin: 20px 0 0;
+    line-height: 1.6;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 26px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  .meta b { color: var(--muted); font-weight: 600; }
+
+  /* ---- sections ---- */
+  section { padding: 46px 0; border-top: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(24px, 3.4vw, 33px);
+    letter-spacing: -0.015em;
+    margin: 6px 0 0;
+  }
+  .sec-note { color: var(--muted); font-size: 15px; max-width: 62ch; margin: 12px 0 26px; }
+
+  .frictions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .friction { background: var(--card); padding: 18px 20px; }
+  .friction .q {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .friction .p { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+  /* ---- legend ---- */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .legend .grp { display: flex; align-items: center; gap: 8px; }
+  .legend .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .vdot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .vdot.high { background: var(--violet); }
+  .vdot.med { background: var(--teal-bright); }
+  .eff {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; color: var(--muted);
+  }
+
+  /* ---- waves ---- */
+  .wave-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 99px;
+  }
+  .wave-now { color: var(--violet-ink); background: var(--tint-violet); }
+  .wave-next { color: var(--teal); background: var(--tint-teal); }
+  .wave-later { color: var(--gold); background: var(--tint-gold); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+    margin-top: 22px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 20px 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; border-radius: 0 3px 3px 0;
+  }
+  .card.now::before { background: var(--violet); }
+  .card.next::before { background: var(--teal-bright); }
+  .card.later::before { background: var(--gold); }
+  .card .kicker {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.13em; text-transform: uppercase; color: var(--faint);
+    margin-bottom: 9px;
+  }
+  .card h3 {
+    font-size: 17.5px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .card .foot {
+    display: flex; align-items: center; gap: 12px; margin-top: 15px; padding-top: 13px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .card .foot .v { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+  .card .foot .spacer { flex: 1; }
+  .card .swatches { display: flex; gap: 6px; margin-top: 14px; }
+  .card .sw { width: 26px; height: 26px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(20,35,29,0.08); }
+
+  /* ---- polish grid ---- */
+  .polish {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .p-item { background: var(--card); padding: 16px 18px; }
+  .p-item .t { font-weight: 600; font-size: 14.5px; }
+  .p-item .d { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.45; }
+
+  /* ---- money band ---- */
+  .money {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 22px;
+  }
+  .money .m {
+    border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; background: var(--card);
+  }
+  .money .m .h { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+  .money .m .s { font-size: 13.5px; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+  .money .m .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-top: 11px; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 34px 0 60px;
+    color: var(--faint);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  footer b { color: var(--muted); font-weight: 600; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card, .friction, .p-item { animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+    .cards .card:nth-child(2) { animation-delay: 0.04s; }
+    .cards .card:nth-child(3) { animation-delay: 0.08s; }
+    .cards .card:nth-child(4) { animation-delay: 0.12s; }
+    .cards .card:nth-child(5) { animation-delay: 0.16s; }
+    .cards .card:nth-child(6) { animation-delay: 0.2s; }
+    .cards .card:nth-child(7) { animation-delay: 0.24s; }
+    .cards .card:nth-child(8) { animation-delay: 0.28s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+
+/* ---- shared top nav ---- */
+:root{ --nav-bg:rgba(244,246,240,.82); --nav-line:#e2e7dd; --nav-ink:#14231d; --nav-muted:#5c6b63; }
+@media (prefers-color-scheme:dark){ :root{ --nav-bg:rgba(15,21,18,.82); --nav-line:#26302a; --nav-ink:#f2f5ee; --nav-muted:#97a69b; } }
+.topnav{ position:sticky; top:0; z-index:100; display:flex; align-items:center; gap:20px; height:58px; padding:0 22px; background:var(--nav-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--nav-line); }
+.nb-brand{ display:flex; align-items:center; gap:9px; text-decoration:none; flex:none; }
+.nb-brand b{ font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:16px; letter-spacing:-.01em; color:var(--nav-ink); }
+.nb-tabs{ display:flex; align-items:stretch; height:100%; margin-left:4px; overflow-x:auto; scrollbar-width:none; }
+.nb-tabs::-webkit-scrollbar{ display:none; }
+.nb-tab{ position:relative; display:flex; align-items:center; height:100%; padding:0 14px; white-space:nowrap; text-decoration:none; font-family:"Inter",-apple-system,sans-serif; font-size:14px; font-weight:500; color:var(--nav-muted); transition:color .15s ease; }
+.nb-tab:hover{ color:var(--nav-ink); }
+.nb-tab.is-active{ color:var(--nav-ink); font-weight:600; }
+.nb-tab.is-active::after{ content:""; position:absolute; left:12px; right:12px; bottom:0; height:2px; border-radius:2px 2px 0 0; background:#6C5CE7; }
+.nb-tab:focus-visible{ outline:2px solid #6C5CE7; outline-offset:-4px; border-radius:8px; }
+@media (max-width:560px){ .nb-brand b{ display:none; } .nb-tab{ padding:0 11px; font-size:13.5px; } }
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="nb-brand" href="./" aria-label="Catch Up home"><svg width="30" height="20" viewBox="0 0 460 300" aria-hidden="true"><circle cx="290" cy="150" r="100" fill="none" stroke="#FF6B4A" stroke-width="28"/><circle cx="170" cy="150" r="100" fill="none" stroke="#12A594" stroke-width="28"/><path d="M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z" fill="#6C5CE7"/></svg><b>Catch up.</b></a>
+  <div class="nb-tabs">
+    <a class="nb-tab" href="./">Home</a>
+    <a class="nb-tab is-active" href="./pipeline.html" aria-current="page">Product pipeline</a>
+    <a class="nb-tab" href="./research.html">Product research</a>
+  </div>
+</nav>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Product pipeline</div>
+    <h1>From a working app to the app they can&#8217;t stop using.</h1>
+    <p class="lede">
+      The core loop ships and works &#8212; calendars in, overlaps out, one nudge to a plan. This is the
+      build order that turns that into a habit: every feature below is tied to a real friction, ranked
+      by the value it unlocks against the effort to build it.
+    </p>
+    <div class="meta">
+      <span><b>20</b> features</span>
+      <span><b>3</b> build waves</span>
+      <span><b>1</b> brand-craft track</span>
+      <span><b>10</b> feel &amp; polish upgrades</span>
+      <span>Grounded in the shipped v1</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow" style="color: var(--coral)">The why</div>
+      <h2>The frictions we&#8217;re killing</h2>
+    </div>
+    <p class="sec-note">
+      Catch Up only earns a place on the home screen if it removes a specific pain. Every feature in
+      the pipeline points back to one of these.
+    </p>
+    <div class="frictions">
+      <div class="friction">
+        <div class="q">&#8220;When&#8217;s everyone free??&#8221;</div>
+        <div class="p">40 messages and a dead poll to pick one night. Coordination is the whole job.</div>
+      </div>
+      <div class="friction">
+        <div class="q">&#8220;We should catch up soon.&#8221;</div>
+        <div class="p">Good intentions that never become a date. Plans fizzle in the chat.</div>
+      </div>
+      <div class="friction">
+        <div class="q">&#8220;Oh, you were free too?&#8221;</div>
+        <div class="p">Both open on Thursday, neither knew. Overlaps stay invisible.</div>
+      </div>
+      <div class="friction">
+        <div class="q">&#8220;I&#8217;ll just leave them on read&#8230;&#8221;</div>
+        <div class="p">Saying no is awkward, so nobody answers at all.</div>
+      </div>
+      <div class="friction">
+        <div class="q">&#8220;It&#8217;s been months.&#8221;</div>
+        <div class="p">Friendships drift because the friction to meet is higher than the friction to skip.</div>
+      </div>
+      <div class="friction">
+        <div class="q">&#8220;Where do we even go?&#8221;</div>
+        <div class="p">Decision paralysis on the venue kills momentum right at the finish line.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="legend">
+      <span class="lbl">Read each card</span>
+      <span class="grp"><span class="vdot high"></span> High value</span>
+      <span class="grp"><span class="vdot med"></span> Medium value</span>
+      <span class="grp"><span class="eff">S</span> <span class="eff">M</span> <span class="eff">L</span> effort to build</span>
+      <span class="grp" style="margin-left:auto"><span class="lbl">Kicker = the friction it kills</span></span>
+    </div>
+
+    <div class="sec-head">
+      <span class="wave-tag wave-now">Wave 1 &#183; Now</span>
+      <h2>Finish the promise</h2>
+    </div>
+    <p class="sec-note">
+      What the first real users hit within a week &#8212; the gaps between &#8220;it works&#8221; and &#8220;it&#8217;s
+      complete.&#8221; Highest value, mostly small-to-medium lifts.
+    </p>
+    <div class="cards">
+      <div class="card now">
+        <div class="kicker">The core surface</div>
+        <h3>A week that comes alive</h3>
+        <p>The week grid is the heart of it &#8212; so make it feel alive. Swipe across weeks, drag to paint your free time, and watch a cell turn gold the moment everyone lines up.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now">
+        <div class="kicker">Plans fizzle</div>
+        <h3>Plans that flex</h3>
+        <p>Move a time or venue and everyone gets a quiet &#8220;still good?&#8221; re-confirm &#8212; instead of the plan quietly dying when one thing clashes.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now">
+        <div class="kicker">Missed overlaps</div>
+        <h3>Set-and-forget free time</h3>
+        <p>&#8220;I&#8217;m always free Thursday nights.&#8221; Recurring availability means more real overlaps surface with zero weekly upkeep.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now">
+        <div class="kicker">Get friends on</div>
+        <h3>Invites that just work</h3>
+        <p>A share link (WhatsApp, Messages) that drops a friend <em>straight into your circle</em> &#8212; install, sign up, and the overlap is already there. The growth engine.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now">
+        <div class="kicker">Out of sight</div>
+        <h3>Home &amp; lock-screen widgets</h3>
+        <p>Your next plan and this week&#8217;s gold slots, glanceable without opening the app. The single strongest retention lever for a time app.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now">
+        <div class="kicker">Privacy &#183; App Store</div>
+        <h3>Your data, your call</h3>
+        <p>In-app account deletion and a plain &#8220;here&#8217;s exactly what each circle can see&#8221; view. Deepens the trust promise &#8212; and Apple requires deletion anyway.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">S</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="wave-tag wave-next">Wave 2 &#183; Next</span>
+      <h2>Deepen the habit</h2>
+    </div>
+    <p class="sec-note">
+      Once the loop is complete, these make Catch Up something people open on their own &#8212; proactive,
+      personal, spontaneous, and rewarding to come back to.
+    </p>
+    <div class="cards">
+      <div class="card next">
+        <div class="kicker">Drifting</div>
+        <h3>The weekend nudge</h3>
+        <p>A Sunday digest: &#8220;2 gold slots with the Uni crew this week.&#8221; The app reaches out before the drift sets in.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">S</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Signal, not noise</div>
+        <h3>Notifications, done right</h3>
+        <p>Every reply, friend join, and plan change lands as a clear, actionable alert &#8212; grouped in a tidy centre, tunable per circle and per type, answerable without opening the app. Never a buzz that isn&#8217;t worth it.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Where to go</div>
+        <h3>Local spots, near everyone</h3>
+        <p>Suggestions anchored to where you actually are &#8212; the good local pubs, cafes and restaurants a short walk from the crew&#8217;s midpoint, open now, weather-aware. The map and venue engine already run on your location.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Identity</div>
+        <h3>Your profile, built out</h3>
+        <p>More than a coloured dot: a photo, a line about you, your go-to spots and catch-up history &#8212; the identity that makes a circle feel like people, not initials.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Commit &#183; Revenue</div>
+        <h3>Book it in-app</h3>
+        <p>Reserve the table without leaving Catch Up. Removes the last drop-off &#8212; and it&#8217;s the doorway to venue revenue.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">L</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Full picture</div>
+        <h3>Every calendar</h3>
+        <p>Outlook / Microsoft (creds already in hand) plus multiple calendars per person &#8212; so &#8220;free&#8221; means genuinely free.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Spontaneity</div>
+        <h3>Free right now</h3>
+        <p>One tap to broadcast &#8220;who&#8217;s about tonight?&#8221; to a circle &#8212; for the catch-ups that happen on a whim, not a calendar.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card next">
+        <div class="kicker">Anticipation</div>
+        <h3>Plan-day Live Activity</h3>
+        <p>On the day, a lock-screen countdown with who&#8217;s in &#8212; the little hit of anticipation that makes the plan feel real.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="wave-tag wave-later">Wave 3 &#183; Later</span>
+      <h2>Delight &amp; intelligence</h2>
+    </div>
+    <p class="sec-note">
+      The differentiators &#8212; where Catch Up stops being a utility and starts feeling like it&#8217;s
+      looking out for your friendships. Several lean on the Claude API you already have wired.
+    </p>
+    <div class="cards">
+      <div class="card later">
+        <div class="kicker">Drifting &#183; AI</div>
+        <h3>Catch Up knows</h3>
+        <p>&#8220;You haven&#8217;t seen Dee in six weeks &#8212; and you&#8217;re both free Saturday.&#8221; Proactive, specific, gently timed.</p>
+        <div class="foot"><span class="v"><span class="vdot high"></span>High</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card later">
+        <div class="kicker">Coordination &#183; AI</div>
+        <h3>Just ask</h3>
+        <p>&#8220;Find a coffee with Sam next week.&#8221; Plain words in, a proposed slot and spot out &#8212; coordination with no taps.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card later">
+        <div class="kicker">Memories</div>
+        <h3>After the catch-up</h3>
+        <p>A quiet &#8220;how was it?&#8221; and a shared photo. Turns one-off plans into a thread of memories worth coming back for.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card later">
+        <div class="kicker">Repeat plans</div>
+        <h3>Plan templates</h3>
+        <p>&#8220;Thursday pub,&#8221; &#8220;Sunday ride&#8221; &#8212; the catch-ups you repeat, one tap instead of rebuilding each time.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">S</span></div>
+      </div>
+      <div class="card later">
+        <div class="kicker">Retention</div>
+        <h3>Your year in catch-ups</h3>
+        <p>A gentle end-of-year look back &#8212; who you saw, the streaks, the gold nights. Shareable, and quietly motivating.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">S</span></div>
+      </div>
+      <div class="card later">
+        <div class="kicker">Reach</div>
+        <h3>Android &amp; iPad</h3>
+        <p>The crew is never all on iPhone. Expo makes Android close to free; iPad widens the surface. Reach unlocks the network effect.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">L</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow" style="color: var(--violet-ink)">Look &amp; feel</div>
+      <h2>Brand &amp; craft evolution</h2>
+    </div>
+    <p class="sec-note">
+      The identity is already strong &#8212; teal, coral, violet, gold on paper, with Fraunces and a
+      privacy-first voice. This track deepens its <em>expression</em> rather than replacing it: more
+      range, more signature moments, more warmth. Runs alongside the waves, a little in each release.
+    </p>
+    <div class="cards">
+      <div class="card now" style="--violet: var(--teal-bright)">
+        <div class="kicker">Colour</div>
+        <h3>Palette, evolved</h3>
+        <p>Keep the accessible core and the eight person-hues; add depth &#8212; subtle gradients for the gold &#8220;it&#8217;s happening&#8221; moment, richer dark-mode tones, tints that carry meaning. Always AA-contrast, always colour-plus-shape.</p>
+        <div class="swatches" aria-hidden="true">
+          <span class="sw" style="background:#12A594"></span>
+          <span class="sw" style="background:#FF6B4A"></span>
+          <span class="sw" style="background:#6C5CE7"></span>
+          <span class="sw" style="background:#F0A81E"></span>
+          <span class="sw" style="background:#2F80ED"></span>
+          <span class="sw" style="background:#E0447C"></span>
+          <span class="sw" style="background:#4E9A2E"></span>
+        </div>
+      </div>
+      <div class="card now" style="--violet: var(--teal-bright)">
+        <div class="kicker">Motion</div>
+        <h3>Moments worth animating</h3>
+        <p>The gold match, the plan confirming, the mark drawing itself &#8212; give the few emotional beats a signature motion and a little sound, so the app has moments people remember.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now" style="--violet: var(--teal-bright)">
+        <div class="kicker">Warmth</div>
+        <h3>Illustration &amp; empty states</h3>
+        <p>Bespoke art where the app is quiet &#8212; the empty circle, the &#8220;you&#8217;re set&#8221; screen, the year in review. Warmth beyond geometry, in the brand&#8217;s own hand.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">M</span></div>
+      </div>
+      <div class="card now" style="--violet: var(--teal-bright)">
+        <div class="kicker">Identity</div>
+        <h3>Icon &amp; themes</h3>
+        <p>Alternate app icons and seasonal themes (a tidy Plus perk), plus a refined icon set across the tabs &#8212; small touches that make it feel crafted, and personal.</p>
+        <div class="foot"><span class="v"><span class="vdot med"></span>Medium</span><span class="spacer"></span><span class="eff">S</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow" style="color: var(--gold)">Cross-cutting</div>
+      <h2>Feel &amp; polish</h2>
+    </div>
+    <p class="sec-note">
+      The details that separate &#8220;a working app&#8221; from one that feels considered. Small on their own;
+      together they&#8217;re the difference people can feel but can&#8217;t name. Woven through every wave.
+    </p>
+    <div class="polish">
+      <div class="p-item"><div class="t">Haptics at the good moments</div><div class="d">A gold match, a plan confirmed, an &#8220;I&#8217;m in&#8221; &#8212; each with its own subtle tap.</div></div>
+      <div class="p-item"><div class="t">Optimistic taps, no spinners</div><div class="d">Everything responds instantly; a shape holds the space where a spinner would nag.</div></div>
+      <div class="p-item"><div class="t">A sample circle in onboarding</div><div class="d">Feel the magic &#8212; a gold overlap, a nudge &#8212; before any friends have joined.</div></div>
+      <div class="p-item"><div class="t">Empty states that teach</div><div class="d">Nothing on the board? One tap does the obvious next thing, and says why.</div></div>
+      <div class="p-item"><div class="t">Undo on anything that removes</div><div class="d">Leave a circle, decline a plan &#8212; a quiet second chance, always.</div></div>
+      <div class="p-item"><div class="t">Search when lists grow</div><div class="d">Friends and circles stay fast to navigate as the crew gets bigger.</div></div>
+      <div class="p-item"><div class="t">Accessible by default</div><div class="d">VoiceOver labels, Dynamic Type, and Reduce Motion respected across every screen.</div></div>
+      <div class="p-item"><div class="t">Pull-to-refresh &amp; smooth transitions</div><div class="d">The motion already in the app, extended to every list and hand-off.</div></div>
+      <div class="p-item"><div class="t">Per-circle nudge tuning</div><div class="d">Louder for the crew you always say yes to, quieter for the ones you don&#8217;t.</div></div>
+      <div class="p-item"><div class="t">Quiet by design</div><div class="d">Sound off by default, notifications only for genuine matches &#8212; protect the &#8220;no noise&#8221; promise.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow" style="color: var(--teal)">Why it pays</div>
+      <h2>Where the value becomes revenue</h2>
+    </div>
+    <p class="sec-note">
+      Nothing above paywalls the core magic. Revenue rides on top of features people already want more of.
+    </p>
+    <div class="money">
+      <div class="m">
+        <div class="h">Catch Up Plus</div>
+        <div class="s">Unlimited circles, every calendar, widgets &amp; Live Activities, custom themes and icons. The heavy users pay to go deeper &#8212; the loop stays free.</div>
+        <div class="tag">~A$4.99/mo &#183; subscription</div>
+      </div>
+      <div class="m">
+        <div class="h">Venue side</div>
+        <div class="s">Once a circle is deciding <em>where</em>, placement and perks in suggestions plus in-app booking turn intent into bookings. Start Melbourne inner-north.</div>
+        <div class="tag">Placement &#183; booking referral</div>
+      </div>
+      <div class="m">
+        <div class="h">Fill the empty slot</div>
+        <div class="s">A gold night with no plan yet is a perfect, opt-in moment to surface a gig or event &#8212; helpful, not spammy.</div>
+        <div class="tag">Event affiliate</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="padding:0">
+      <b>Catch Up &#8212; product pipeline.</b> Three waves plus a brand-craft track, pain-first, ranked value against effort.<br />
+      This is the menu, not the commitment &#8212; the next step is picking Wave 1&#8217;s order and turning it into a dated build plan.
+    </div>
+  </footer>
+</div>
+</body>
+</html>
