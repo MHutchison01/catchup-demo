@@ -4,20 +4,244 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catch Up — Product research</title>
-<meta name="description" content="User research behind Catch Up — coming soon.">
+<meta name="description" content="The user research behind Catch Up: ten discovery interviews run through JTBD personas, the Opportunity Algorithm, Kano, SWOT and a competitor radar — and how it reshapes the roadmap.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 300'><circle cx='290' cy='150' r='100' fill='none' stroke='%23FF6B4A' stroke-width='28'/><circle cx='170' cy='150' r='100' fill='none' stroke='%2312A594' stroke-width='28'/><path d='M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z' fill='%236C5CE7'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{ --ink:#14231D; --paper:#F4F6F0; --muted:#5C6B63; --faint:#8A978D; --line:#E2E7DD; --teal-deep:#0B7568; }
-@media (prefers-color-scheme:dark){ :root{ --ink:#F2F5EE; --paper:#0F1512; --muted:#97A69B; --faint:#6A786E; --line:#26302A; --teal-deep:#4FD0BD; } }
+:root{
+  --teal:#12A594; --teal-deep:#0B7568; --coral:#FF6B4A; --violet:#6C5CE7;
+  --gold:#F0A81E; --ink:#14231D; --paper:#F4F6F0; --muted:#5C6B63; --faint:#8A978D;
+  --line:#E2E7DD; --card:#FFFFFF; --card-2:#FBFCF8; --shadow:0 22px 50px -34px rgba(20,35,29,.45);
+}
+@media (prefers-color-scheme:dark){
+  :root{ --ink:#F2F5EE; --paper:#0F1512; --muted:#97A69B; --faint:#6A786E; --line:#26302A;
+    --card:#18201B; --card-2:#141B16; --teal-deep:#4FD0BD; --shadow:0 22px 50px -30px rgba(0,0,0,.6); }
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Inter",-apple-system,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
-.rwrap{min-height:calc(100vh - 58px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px 80px;gap:0}
-.r-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep)}
-.rwrap h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(34px,6vw,52px);font-weight:600;line-height:1.06;letter-spacing:-.02em;margin:14px 0 0;max-width:16ch;text-wrap:balance}
-.rwrap p{font-size:16.5px;color:var(--muted);line-height:1.6;max-width:52ch;margin:18px 0 0}
-.chip{margin-top:30px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);border:1px dashed var(--line);border-radius:99px;padding:8px 16px}
-.r-mark{opacity:.5;margin-bottom:6px}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",-apple-system,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+.rx{max-width:1080px;margin:0 auto;padding:0 28px}
+section{padding:64px 0}
+section+section{border-top:1px solid var(--line)}
+
+/* type */
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep)}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(26px,3.6vw,36px);line-height:1.1;letter-spacing:-.015em;margin:12px 0 0;text-wrap:balance}
+.lead{font-size:16.5px;color:var(--muted);line-height:1.62;max-width:64ch;margin:16px 0 0}
+.sec-head{margin-bottom:34px}
+h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:20px;letter-spacing:-.01em}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* reveal */
+.rise{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){ .rise{opacity:1!important;transform:none!important;transition:none} }
+
+/* ---------- HERO ---------- */
+.hero{padding:74px 0 60px;position:relative;overflow:hidden}
+.hero .rx{position:relative;z-index:1}
+.hero-glow{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(560px 300px at 78% 8%,rgba(108,92,231,.16),transparent 60%),
+             radial-gradient(520px 320px at 8% 96%,rgba(18,165,148,.14),transparent 62%)}
+.hero h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-.02em;margin:16px 0 0;max-width:19ch;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--violet);position:relative;white-space:nowrap}
+.hero .lead{font-size:18px;max-width:56ch;margin-top:20px}
+.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px}
+.stat .n{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(26px,3vw,34px);letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.stat .k{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+.stat .n b{color:var(--teal-deep);font-weight:600}
+@media(max-width:720px){ .statrow{grid-template-columns:repeat(2,1fr)} }
+
+/* ---------- METHOD strip ---------- */
+.method{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.mcard{flex:1 1 200px;background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.mcard .t{font-size:13px;font-weight:600;color:var(--ink);display:flex;gap:8px;align-items:center}
+.mcard .d{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
+.mcard .num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--teal-deep)}
+.caveat{margin-top:18px;border:1px dashed var(--line);border-radius:14px;overflow:hidden}
+.caveat button{all:unset;cursor:pointer;display:flex;width:100%;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;font-size:13.5px;font-weight:600;color:var(--ink)}
+.caveat button .chev{transition:transform .25s ease;color:var(--faint)}
+.caveat.open button .chev{transform:rotate(90deg)}
+.caveat .body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.caveat.open .body{max-height:260px}
+.caveat .body p{padding:0 18px 16px;font-size:13.5px;color:var(--muted);line-height:1.6;max-width:74ch}
+.tag-good{color:var(--teal-deep)} .tag-soft{color:var(--gold)}
+
+/* ---------- INSIGHT (two forces) ---------- */
+.jtbd{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:20px;padding:30px 30px 26px;box-shadow:var(--shadow)}
+.jtbd .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.jtbd .q{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:clamp(20px,2.6vw,27px);line-height:1.34;letter-spacing:-.01em;margin-top:14px;text-wrap:balance}
+.jtbd .q b{color:var(--violet);font-weight:600}
+.forces{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.force{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--card)}
+.force .h{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.force .badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;font-weight:700;color:#fff}
+.force p{font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.55}
+.force .ex{margin-top:12px;font-size:12.5px;font-style:italic;color:var(--ink);border-left:3px solid var(--line);padding-left:12px;line-height:1.5}
+@media(max-width:640px){ .forces{grid-template-columns:1fr} }
+
+/* ---------- OPPORTUNITY ---------- */
+.opp-legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:20px;font-size:12.5px;color:var(--muted)}
+.opp-legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:12px;height:12px;border-radius:3px;flex:none}
+.formula{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint);border:1px solid var(--line);border-radius:8px;padding:4px 10px;background:var(--card-2)}
+.opp{display:flex;flex-direction:column;gap:10px}
+.opp-row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;transition:border-color .18s ease,box-shadow .18s ease}
+.opp-row:hover{border-color:var(--violet);box-shadow:var(--shadow)}
+.opp-row.on{border-color:var(--violet)}
+.opp-top{display:flex;align-items:center;gap:14px}
+.opp-label{flex:1;font-size:14.5px;font-weight:600;line-height:1.3}
+.opp-score{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:22px;line-height:1;flex:none;width:44px;text-align:right}
+.opp-score.hi{color:var(--coral)} .opp-score.mid{color:var(--gold)} .opp-score.lo{color:var(--teal-deep)}
+.opp-score small{display:block;font-family:"IBM Plex Mono",monospace;font-size:8.5px;font-weight:600;letter-spacing:.1em;color:var(--faint);margin-top:3px}
+.bars{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.bar{display:flex;align-items:center;gap:10px}
+.bar .bl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);width:66px;flex:none}
+.track{flex:1;height:8px;border-radius:6px;background:var(--line);overflow:hidden}
+.fill{display:block;height:100%;border-radius:6px;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.bar .bv{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;width:20px;text-align:right;color:var(--muted)}
+.opp-drawer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.opp-row.on .opp-drawer{max-height:180px}
+.opp-drawer .qq{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;font-style:italic;color:var(--ink);line-height:1.55}
+.opp-drawer .qa{font-style:normal;color:var(--faint);font-size:12px;margin-top:6px;font-family:"IBM Plex Mono",monospace}
+.corro{margin-top:20px;font-size:13px;color:var(--muted);background:var(--card-2);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 16px;line-height:1.55}
+
+/* ---------- PERSONAS ---------- */
+.p-spine{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.p-tab{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:14px;padding:14px 15px;background:var(--card);transition:transform .16s ease,border-color .16s ease;position:relative;overflow:hidden}
+.p-tab:hover{transform:translateY(-2px)}
+.p-tab .em{font-size:22px}
+.p-tab .nm{font-weight:600;font-size:14px;margin-top:8px}
+.p-tab .rl{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.3}
+.p-tab .strip{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--pc)}
+.p-tab[aria-selected="true"]{border-color:var(--pc);box-shadow:var(--shadow)}
+.p-tab:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+@media(max-width:720px){ .p-spine{grid-template-columns:repeat(2,1fr)} }
+
+.p-panel{display:none;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:var(--card)}
+.p-panel.show{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.p-hd{padding:24px 28px;color:#fff;position:relative;background:var(--pc)}
+.p-hd .seg{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.p-hd .who{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px;margin-top:6px;letter-spacing:-.01em}
+.p-hd .snap{font-size:13.5px;margin-top:8px;opacity:.95;max-width:60ch;line-height:1.5}
+.p-hd .em{position:absolute;right:22px;top:18px;font-size:44px;opacity:.9}
+.p-body{padding:26px 28px;display:grid;grid-template-columns:1.15fr 1fr;gap:28px}
+@media(max-width:760px){ .p-body{grid-template-columns:1fr;gap:22px} .p-hd .em{font-size:34px} }
+.p-body h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.jrow{display:flex;gap:10px;margin-bottom:10px;font-size:13.5px;line-height:1.5}
+.jrow .jk{flex:none;width:74px;font-weight:600;color:var(--pc)}
+.blocker{margin-top:18px;background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.blocker .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.blocker p{font-size:13.5px;margin-top:6px;line-height:1.5;color:var(--ink)}
+.quotes{display:flex;flex-direction:column;gap:12px}
+.quote{border-left:3px solid var(--pc);padding:2px 0 2px 14px}
+.quote p{font-size:13.5px;font-style:italic;line-height:1.5;color:var(--ink)}
+.quote .a{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);margin-top:5px;font-style:normal}
+.needs{margin-top:16px}
+.needs .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.needs li{list-style:none;font-size:13px;line-height:1.5;padding-left:18px;position:relative;margin-bottom:6px;color:var(--ink)}
+.needs li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:99px;background:var(--pc)}
+.traits{margin-top:6px}
+.trait{margin-bottom:11px}
+.trait .tl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:5px}
+.trait .tt{height:6px;border-radius:6px;background:var(--line);position:relative}
+.trait .tt i{position:absolute;top:50%;width:13px;height:13px;border-radius:99px;background:var(--pc);transform:translate(-50%,-50%);box-shadow:0 0 0 3px var(--card)}
+.p-shape{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;margin-top:2px}
+.p-shape .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pc);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip2{font-size:12.5px;font-weight:500;background:var(--card-2);border:1px solid var(--line);border-radius:99px;padding:7px 13px;color:var(--ink)}
+.chip2 b{color:var(--pc);font-weight:600}
+
+/* ---------- KANO ---------- */
+.kano-wrap{display:grid;grid-template-columns:1fr;gap:22px}
+.kano-curve{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.kano-cols{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:900px){ .kano-cols{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:520px){ .kano-cols{grid-template-columns:1fr} }
+.kcol{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;border-top:3px solid var(--kc)}
+.kcol .kt{font-weight:700;font-size:13.5px;color:var(--kc)}
+.kcol .kd{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45;min-height:52px}
+.kcol ul{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.kcol li{list-style:none;font-size:12.5px;line-height:1.4;background:var(--card-2);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+
+/* ---------- COMPETITORS / RADAR ---------- */
+.radar-box{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+@media(max-width:820px){ .radar-box{grid-template-columns:1fr} }
+.radar-svg-wrap{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px}
+#radar{width:100%;height:auto;display:block}
+.r-legend{display:flex;flex-direction:column;gap:9px}
+.r-legend button{all:unset;cursor:pointer;display:flex;align-items:center;gap:11px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:border-color .16s ease,opacity .16s ease}
+.r-legend button .sw{width:14px;height:14px;border-radius:4px;flex:none}
+.r-legend button .ln{font-weight:600;font-size:13.5px}
+.r-legend button .sub{font-size:11.5px;color:var(--muted);margin-left:auto}
+.r-legend button[aria-pressed="false"]{opacity:.42}
+.r-legend button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.r-note{font-size:12px;color:var(--faint);margin-top:14px;line-height:1.5}
+.landscape{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){ .landscape{grid-template-columns:1fr} }
+.lcard{background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.lcard .lt{font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.lcard .lp{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.5}
+.lcard.hot{border-color:var(--coral);background:linear-gradient(180deg,rgba(255,107,74,.06),var(--card-2))}
+
+/* ---------- SWOT ---------- */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){ .swot{grid-template-columns:1fr} }
+.sq{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--card);border-top:3px solid var(--sc)}
+.sq .sh{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;color:var(--sc)}
+.sq ul{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.sq li{list-style:none;font-size:13px;line-height:1.5;padding-left:16px;position:relative;color:var(--ink)}
+.sq li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:2px;background:var(--sc)}
+
+/* ---------- STRATEGY ---------- */
+.strat{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:820px){ .strat{grid-template-columns:1fr} }
+.vision{background:linear-gradient(150deg,var(--violet),#8b7bf0);border-radius:20px;padding:30px;color:#fff;box-shadow:var(--shadow)}
+.vision .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.vision .v{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:19px;line-height:1.5;margin-top:14px}
+.vision .v u{text-decoration:none;background:rgba(255,255,255,.22);border-radius:5px;padding:1px 6px;font-weight:600}
+.kernel{display:flex;flex-direction:column;gap:12px}
+.kstep{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card);border-left:3px solid var(--teal)}
+.kstep .kk{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);display:flex;align-items:center;gap:8px}
+.kstep .kk b{background:var(--teal);color:#fff;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:11px}
+.kstep p{font-size:13.5px;color:var(--ink);margin-top:8px;line-height:1.55}
+.nos{margin-top:8px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card-2)}
+.nos .kk{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+.nos .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.no{font-size:12.5px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 12px;color:var(--muted)}
+.no b{color:var(--coral);font-weight:700;margin-right:4px}
+
+/* ---------- BRIDGE ---------- */
+.bridge{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card)}
+.bhead,.brow{display:grid;grid-template-columns:1.1fr 1.2fr 1fr;gap:0}
+.bhead{background:var(--card-2);border-bottom:1px solid var(--line)}
+.bhead div{padding:14px 18px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.brow{border-bottom:1px solid var(--line)}
+.brow:last-child{border-bottom:none}
+.brow>div{padding:16px 18px;font-size:13.5px;line-height:1.5}
+.brow .c1{font-weight:600;border-right:1px solid var(--line)}
+.brow .c2{color:var(--muted);border-right:1px solid var(--line)}
+.brow .c3 b{color:var(--violet);font-weight:600}
+.brow .c3 .ar{color:var(--violet);margin-right:6px}
+@media(max-width:760px){
+  .bhead{display:none}
+  .brow{grid-template-columns:1fr;gap:0}
+  .brow>div{border-right:none!important;padding:12px 16px}
+  .brow .c1{padding-top:16px}
+  .brow .c2::before{content:"Design implication";display:block;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+  .brow .c3{padding-bottom:16px}
+  .brow .c3::before{content:"Shapes in the pipeline";display:block;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+}
+
+/* ---------- FOOTER ---------- */
+.rfoot{padding:44px 0 70px;text-align:center}
+.rfoot .m{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+.rfoot a{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:10px 18px;transition:border-color .16s ease}
+.rfoot a:hover{border-color:var(--violet);color:var(--violet)}
+.rfoot .cr{font-size:12px;color:var(--faint);margin-top:22px;line-height:1.6}
+.divider-note{font-size:12.5px;color:var(--faint);font-style:italic;margin-top:8px}
 
 /* ---- shared top nav ---- */
 :root{ --nav-bg:rgba(244,246,240,.82); --nav-line:#e2e7dd; --nav-ink:#14231d; --nav-muted:#5c6b63; }
@@ -44,12 +268,444 @@ body{font-family:"Inter",-apple-system,sans-serif;background:var(--paper);color:
     <a class="nb-tab is-active" href="./research.html" aria-current="page">Product research</a>
   </div>
 </nav>
-<div class="rwrap">
-  <div class="r-mark"><svg width="76" height="50" viewBox="0 0 460 300" aria-hidden="true"><circle cx="290" cy="150" r="100" fill="none" stroke="#FF6B4A" stroke-width="28"/><circle cx="170" cy="150" r="100" fill="none" stroke="#12A594" stroke-width="28"/><path d="M230 88.4 A86 86 0 0 1 230 211.6 A86 86 0 0 1 230 88.4 Z" fill="#6C5CE7"/></svg></div>
-  <div class="r-eyebrow">Product research</div>
-  <h1>Coming soon.</h1>
-  <p>This is where the user research lives — the interviews, the friction we heard first-hand, the numbers behind the roadmap. We'll build it out together.</p>
-  <div class="chip">In progress</div>
-</div>
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="rx">
+    <div class="eyebrow rise">Product research &middot; Syndicate 3 &middot; Digital Product Management</div>
+    <h1 class="rise">We asked ten people how they see their friends. The answer wasn&rsquo;t a <em>calendar problem.</em></h1>
+    <p class="lead rise">Ten qualitative interviews, run before we designed anything. The coordination pain is real and unprompted &mdash; but underneath it sits a deeper blocker: the <b>effort of organising</b> and the <b>sting of asking</b>. This page walks the evidence through the R&amp;D frameworks from the course, and turns it into four user profiles and a sharper roadmap.</p>
+    <div class="statrow">
+      <div class="stat rise"><div class="n" data-count="10">0</div><div class="k">qualitative discovery interviews</div></div>
+      <div class="stat rise"><div class="n"><span data-count="9">0</span>/10</div><div class="k">raised the problem <b>unprompted</b>, before we described any solution</div></div>
+      <div class="stat rise"><div class="n">2wk&ndash;18mo</div><div class="k">typical time to lock a plan &mdash; or the gap since last catch-up</div></div>
+      <div class="stat rise"><div class="n" data-count="4">0</div><div class="k">distinct personas &mdash; it isn&rsquo;t one problem</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">01 &middot; How we ran it</div>
+      <h2>Discovery first, solution later</h2>
+      <p class="lead">Following the course&rsquo;s discovery discipline &mdash; <i>ask for desired outcomes, not solutions</i> &mdash; we opened with unprompted narrative questions and only introduced the availability concept at the very end. That order is what makes the evidence trustworthy.</p>
+    </div>
+    <div class="method">
+      <div class="mcard rise"><div class="t"><span class="num">10</span>&nbsp;interviews</div><div class="d">Parents, shift workers, students, young professionals and friends who&rsquo;ve moved away &mdash; a deliberate spread of life stages.</div></div>
+      <div class="mcard rise"><div class="t"><span class="num">Q1&ndash;Q3</span>&nbsp;open &amp; unprompted</div><div class="d">&ldquo;Walk me through a recent catch-up&hellip;&rdquo; The friction pattern emerged in respondents&rsquo; own words, with no steer toward our idea.</div></div>
+      <div class="mcard rise"><div class="t"><span class="num">Q4&ndash;Q5</span>&nbsp;concept probe</div><div class="d">Only here did we ask about seeing availability and sharing it &mdash; treated as directional signal, weighted below the organic stories.</div></div>
+      <div class="mcard rise"><div class="t">JTBD lens</div><div class="d">Coded for the <i>job</i> people were hiring a catch-up to do &mdash; functional, emotional and social &mdash; not the features they asked for.</div></div>
+    </div>
+    <div class="caveat rise" id="caveat">
+      <button aria-expanded="false" onclick="toggleCaveat()"><span>Our own methodology caveat &mdash; where to trust the data, and where to discount it</span><span class="chev">&#9656;</span></button>
+      <div class="body"><p>Questions 4 and 5 (&ldquo;would you be more likely to make plans if you knew they were free?&rdquo; / &ldquo;would you share your availability?&rdquo;) are <span class="tag-soft">closed, leading and solution-adjacent</span> &mdash; they describe Catch Up&rsquo;s mechanism, then ask people to agree. Nearly everyone said yes, which is unsurprising and weak as validation. Our <span class="tag-good">strong</span> evidence is the unprompted narrative in Q1&ndash;Q3, where the same friction surfaced with no prompt toward our solution. We flag this openly rather than counting the &ldquo;yes&rdquo;es as proof.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE INSIGHT + JTBD -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">02 &middot; The core finding</div>
+      <h2>Visibility is necessary. It isn&rsquo;t the whole product.</h2>
+      <p class="lead">Nine of ten described the same failure: plans that stall not for lack of wanting, but because organising is heavy and asking is risky. Two forces, not one, keep willing friends apart &mdash; and only one of them is an information problem.</p>
+    </div>
+    <div class="jtbd rise">
+      <div class="k">The job, in the user&rsquo;s words</div>
+      <div class="q">&ldquo;When I finally have some free time and realise I miss my people, help me find who&rsquo;s <b>genuinely free</b> and lock in a catch-up &mdash; <b>without the effort of chasing</b>, or the <b>sting of asking</b> and getting a no.&rdquo;</div>
+      <div class="forces">
+        <div class="force">
+          <div class="h"><span class="badge" style="background:var(--teal)">1</span>The effort barrier</div>
+          <p>For the busiest respondents the bottleneck is admin, not knowledge. They know their friends exist; they can&rsquo;t face the organising. Visibility they&rsquo;d have to go and check is just more work.</p>
+          <div class="ex">&ldquo;It&rsquo;s not that I don&rsquo;t know when people are free, it&rsquo;s that even the organising of the knowing is too much effort.&rdquo; &mdash; Shift worker, 40</div>
+        </div>
+        <div class="force">
+          <div class="h"><span class="badge" style="background:var(--violet)">2</span>The rejection risk</div>
+          <p>For students and young professionals the block is emotional. A couple of no&rsquo;s and initiation shuts down &mdash; people &ldquo;pattern-recognise&rdquo; rejection and build a story before they&rsquo;ve even asked.</p>
+          <div class="ex">&ldquo;It&rsquo;s very easy to be demotivated to ask the person again if you&rsquo;ve been turned down once.&rdquo; &mdash; MBA student</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY ALGORITHM -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">03 &middot; Opportunity Algorithm</div>
+      <h2>Scoring what people actually want</h2>
+      <p class="lead">We pulled the desired outcomes out of the transcripts (outcomes, not features), then scored each on Importance and how satisfied people are with the status quo. High-importance, low-satisfaction outcomes are where the opportunity lives. Tap any row for the quote behind it.</p>
+    </div>
+    <div class="opp-legend rise">
+      <span><span class="swatch" style="background:var(--teal)"></span>Importance</span>
+      <span><span class="swatch" style="background:var(--gold)"></span>Satisfaction today</span>
+      <span class="formula">Opportunity = Importance + (Importance &minus; Satisfaction)</span>
+    </div>
+    <div class="opp" id="opp"></div>
+    <div class="corro rise">The two highest-scoring outcomes &mdash; <b>knowing who&rsquo;s free (16)</b> and <b>having the plan come to you (14)</b> &mdash; independently reproduce the opportunity table in our group assignment, where &ldquo;know when friends are free&rdquo; also topped out at 16. Different method, same wedge.</div>
+  </div>
+</section>
+
+<!-- PERSONAS -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">04 &middot; Personas &amp; user profiles</div>
+      <h2>Four people, four different reasons the catch-up dies</h2>
+      <p class="lead">The transcripts don&rsquo;t describe one user &mdash; they describe four, each with a distinct blocker and a distinct thing that would fix it. These are composite profiles, built from the interviews and anonymised. Select a profile to open it.</p>
+    </div>
+    <div class="p-spine rise" role="tablist" aria-label="User personas">
+      <button class="p-tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true" style="--pc:var(--gold)" onclick="selPersona(0)"><span class="strip"></span><div class="em">&#129334;</div><div class="nm">Mara, 33</div><div class="rl">The pre-filtered parent</div></button>
+      <button class="p-tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" style="--pc:var(--teal)" onclick="selPersona(1)"><span class="strip"></span><div class="em">&#9992;&#65039;</div><div class="nm">Cam, 41</div><div class="rl">Willing, but flat-out</div></button>
+      <button class="p-tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" style="--pc:var(--violet)" onclick="selPersona(2)"><span class="strip"></span><div class="em">&#127891;</div><div class="nm">Ravi, 26</div><div class="rl">The asking-fatigued</div></button>
+      <button class="p-tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" style="--pc:var(--coral)" onclick="selPersona(3)"><span class="strip"></span><div class="em">&#128506;&#65039;</div><div class="nm">Josie, 34</div><div class="rl">The drifting mate</div></button>
+    </div>
+    <div id="p-panels" class="rise"></div>
+  </div>
+</section>
+
+<!-- KANO -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">05 &middot; Kano analysis</div>
+      <h2>Which features earn love, and which just avoid anger</h2>
+      <p class="lead">The research sorts cleanly onto the Kano model. Some things are invisible until they&rsquo;re missing (privacy, freshness); some scale with quality; a few are genuine delighters that no incumbent offers &mdash; and two would actively hurt us if we shipped them.</p>
+    </div>
+    <div class="kano-wrap">
+      <div class="kano-curve rise">
+        <svg viewBox="0 0 640 260" id="kano-svg" style="width:100%;height:auto" aria-label="Kano model curves"></svg>
+      </div>
+      <div class="kano-cols">
+        <div class="kcol rise" style="--kc:var(--teal-deep)"><div class="kt">Must-be</div><div class="kd">Absent = churn. Present = merely tolerated. The price of entry.</div><ul><li>Friends-only, granular privacy control</li><li>Accurate free / busy (never event names)</li><li>Stays fresh on its own &mdash; no manual upkeep</li></ul></div>
+        <div class="kcol rise" style="--kc:var(--gold)"><div class="kt">Performance</div><div class="kd">More is better. Satisfaction scales linearly with quality.</div><ul><li>Breadth of overlap surfaced</li><li>Speed from &ldquo;free&rdquo; to locked-in plan</li><li>How far ahead gaps are flagged</li></ul></div>
+        <div class="kcol rise" style="--kc:var(--violet)"><div class="kt">Attractive</div><div class="kd">Unexpected delight. Nobody asked, everybody lights up. Our wedge.</div><ul><li>Proactive match &amp; one-tap nudge</li><li>Energy / activity-level signal</li><li>Reconnection triggers for dormant ties</li><li>Claim-the-gap window protection</li></ul></div>
+        <div class="kcol rise" style="--kc:var(--faint)"><div class="kt">Indifferent</div><div class="kd">Users don&rsquo;t care either way. Not the job &mdash; don&rsquo;t invest.</div><ul><li>Discovering brand-new people</li><li>A public content feed</li></ul></div>
+        <div class="kcol rise" style="--kc:var(--coral)"><div class="kt">Reverse</div><div class="kd">Adding these makes it worse. The interviews warned us directly.</div><ul><li>Public broadcast of availability</li><li>Over-notifying / another status to babysit</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITORS + RADAR -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">06 &middot; Competitive landscape</div>
+      <h2>Nobody owns intentional, in-person connection</h2>
+      <p class="lead">We mapped how today&rsquo;s tools serve the job across eight connection dimensions. Toggle a category to compare. The white space is clear: calendars are intentional but cold, messaging is where coordination happens but it&rsquo;s high-effort and lossy, and nothing turns free time into a real-world catch-up.</p>
+    </div>
+    <div class="radar-box">
+      <div class="radar-svg-wrap rise"><svg id="radar" viewBox="-90 -10 640 480" aria-label="Competitor radar chart"></svg></div>
+      <div>
+        <div class="r-legend rise" id="r-legend"></div>
+        <p class="r-note">Eight dimensions, scored 0&ndash;10. Qualitative estimates prepared by Syndicate 3 for illustration, not survey data. Catch Up scores <i>low</i> on &ldquo;discovering new people&rdquo; on purpose &mdash; that isn&rsquo;t the job.</p>
+      </div>
+    </div>
+    <div class="landscape">
+      <div class="lcard hot rise"><div class="lt">&#128293; The real competitor: doing nothing</div><div class="lp">The status quo isn&rsquo;t a rival app &mdash; it&rsquo;s the plan that quietly fizzles. &ldquo;It fizzles more than it happens.&rdquo; Beating <i>inertia</i> is the win.</div></div>
+      <div class="lcard rise"><div class="lt">&#128172; Messaging &amp; polls</div><div class="lp">WhatsApp / Messenger group chats are where coordination lives today &mdash; and where it dies. &ldquo;Forty messages, everyone&rsquo;s half-answered, the moment&rsquo;s gone.&rdquo;</div></div>
+      <div class="lcard rise"><div class="lt">&#128197; Shared calendars</div><div class="lp">Intentional and good at getting to in-person, but cold, effortful and built for work &mdash; not for &ldquo;who&rsquo;s up for a quiet one Thursday.&rdquo;</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SWOT -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">07 &middot; SWOT</div>
+      <h2>Where the opportunity is strong &mdash; and where it&rsquo;s fragile</h2>
+      <p class="lead">A candid read of the concept against what the research told us, good and bad.</p>
+    </div>
+    <div class="swot">
+      <div class="sq rise" style="--sc:var(--teal-deep)"><div class="sh">&#128170; Strengths</div><ul><li>Problem validated unprompted in 9 of 10 interviews</li><li>Emotionally significant &mdash; loss language, not mild annoyance</li><li>Consistent across ages, life stages and cities</li><li>A novel, well-evidenced wedge: reducing the fear of asking</li></ul></div>
+      <div class="sq rise" style="--sc:var(--gold)"><div class="sh">&#9888;&#65039; Weaknesses</div><ul><li>A passive &ldquo;see everyone&rsquo;s calendar&rdquo; view under-serves the highest-pain users</li><li>Value depends on data staying fresh &mdash; decay risk</li><li>&ldquo;Available&rdquo; doesn&rsquo;t mean &ldquo;wants the same activity&rdquo;</li><li>Cold-start: needs a friend group present to work</li></ul></div>
+      <div class="sq rise" style="--sc:var(--violet)"><div class="sh">&#128640; Opportunities</div><ul><li>Proactive match &amp; nudge &mdash; a layer no incumbent offers</li><li>Energy / activity-level signalling to cut social pressure</li><li>Lead-time surfacing purpose-built for parents &amp; carers</li><li>Reconnection triggers for long-distance friendships</li></ul></div>
+      <div class="sq rise" style="--sc:var(--coral)"><div class="sh">&#127993; Threats</div><ul><li>Second-hand exposure &mdash; mutual friends leak your availability</li><li>&ldquo;Redundancy&rdquo; risk: dies like an unmaintained Teams status</li><li>Incumbents (calendar, messaging) bolt on a lite version</li><li>Privacy fears suppress the honest sharing the model needs</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY: VISION + KERNEL -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">08 &middot; Vision &amp; strategy</div>
+      <h2>From evidence to a strategy kernel</h2>
+      <p class="lead">The research resolves into a product vision and a Rumelt strategy kernel &mdash; a diagnosis, a guiding policy, and the coherent actions that follow &mdash; plus the things we&rsquo;re deliberately saying no to.</p>
+    </div>
+    <div class="strat">
+      <div class="vision rise">
+        <div class="k">Product vision statement</div>
+        <div class="v"><b>For</b> <u>time-poor adults whose schedules have drifted from their friends&rsquo;</u> <b>who</b> <u>miss the people they love but are worn down by organising and the fear of asking</u>, <b>Catch Up is</b> <u>a private, friends-only availability &amp; nudge app</u> <b>that</b> <u>surfaces when your people are genuinely free and locks in a plan in one tap</u>. <b>Unlike</b> <u>group-chat polls and shared calendars</u>, which pile the effort and the rejection risk onto you, <b>Catch Up</b> <u>does the noticing for you and turns a low-stakes tap into a real plan</u>.</div>
+      </div>
+      <div class="kernel">
+        <div class="kstep rise"><div class="kk"><b>1</b>Diagnosis</div><p>Catch-ups don&rsquo;t fail for lack of desire. They fail because organising is high-effort and asking carries rejection risk &mdash; so willing friends quietly drift apart. Visibility helps, but alone it&rsquo;s just more admin.</p></div>
+        <div class="kstep rise"><div class="kk"><b>2</b>Guiding policy</div><p>Treat availability as <i>infrastructure, not the product</i>. Win by removing effort (proactively surface the plan) and de-risking the ask (friends-only, no counted rejections, activity-level signalling) &mdash; starting with the two highest-pain personas.</p></div>
+        <div class="kstep rise"><div class="kk"><b>3</b>Coherent actions</div><p>Proactive match &amp; nudge; lead-time-aware surfacing; energy signalling; granular friends-only privacy that stays fresh by itself; reconnection triggers for dormant ties.</p></div>
+        <div class="nos rise"><div class="kk">Explicit no&rsquo;s</div><div class="row"><span class="no"><b>&times;</b>a discovery / dating network</span><span class="no"><b>&times;</b>public availability broadcast</span><span class="no"><b>&times;</b>another manual status to maintain</span><span class="no"><b>&times;</b>an open calendar dump</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE: research -> pipeline -->
+<section>
+  <div class="rx">
+    <div class="sec-head rise">
+      <div class="eyebrow">09 &middot; Research &rarr; development</div>
+      <h2>How each finding reshapes the roadmap</h2>
+      <p class="lead">This is the payoff: the research doesn&rsquo;t just validate the idea, it changes what we build and in what order. Every insight below maps to a design implication and the feature it shapes in our <a href="./pipeline.html" style="color:var(--violet);font-weight:600;text-decoration:none">product pipeline</a>.</p>
+    </div>
+    <div class="bridge rise">
+      <div class="bhead"><div>What we heard</div><div>Design implication</div><div>Shapes in the pipeline</div></div>
+      <div class="brow"><div class="c1">&ldquo;Even the organising of the knowing is too much effort.&rdquo;</div><div class="c2">A passive calendar under-delivers. The plan has to come <i>to</i> the user.</div><div class="c3"><span class="ar">&rarr;</span><b>Proactive match &amp; nudge engine</b> &mdash; one-tap &ldquo;send the nudge&rdquo;</div></div>
+      <div class="brow"><div class="c1">&ldquo;A same-day heads-up isn&rsquo;t much use&hellip; a few days out, that&rsquo;s gold.&rdquo;</div><div class="c2">Surfacing must respect lead time so childcare / logistics can be arranged.</div><div class="c3"><span class="ar">&rarr;</span><b>Lead-time-aware overlap alerts</b> + claim-the-gap window</div></div>
+      <div class="brow"><div class="c1">&ldquo;It&rsquo;s not that I can&rsquo;t come &mdash; they&rsquo;ve stopped asking.&rdquo;</div><div class="c2">Presence must make quiet users visible so they aren&rsquo;t pre-filtered out.</div><div class="c3"><span class="ar">&rarr;</span><b>Profile &amp; presence</b> &mdash; visible availability, no assume-out</div></div>
+      <div class="brow"><div class="c1">&ldquo;Most likely you&rsquo;re just going to get a no.&rdquo;</div><div class="c2">The ask must be low-stakes &mdash; a no is never shown, counted or chased.</div><div class="c3"><span class="ar">&rarr;</span><b>Silent declines</b> + availability-first nudges</div></div>
+      <div class="brow"><div class="c1">&ldquo;I just want a quiet beer&hellip; not a massive night.&rdquo;</div><div class="c2">Free/busy isn&rsquo;t enough &mdash; people need to signal the <i>kind</i> of catch-up.</div><div class="c3"><span class="ar">&rarr;</span><b>Energy / activity-level tags</b> on availability</div></div>
+      <div class="brow"><div class="c1">&ldquo;Gavin can see I&rsquo;m free and tell someone I said I was busy to.&rdquo;</div><div class="c2">Second-hand exposure is the top adoption fear &mdash; control must be granular.</div><div class="c3"><span class="ar">&rarr;</span><b>Per-circle privacy tiers</b> + coarse free/busy only</div></div>
+      <div class="brow"><div class="c1">&ldquo;It looks like you&rsquo;ve got nothing on &mdash; I&rsquo;m coming down.&rdquo;</div><div class="c2">Distant friends need a trigger and travel-aware overlap, not just a view.</div><div class="c3"><span class="ar">&rarr;</span><b>Reconnection triggers</b> + location-aware overlap</div></div>
+    </div>
+    <p class="divider-note">The app&rsquo;s features didn&rsquo;t write this research &mdash; the research is re-ordering the app.</p>
+  </div>
+</section>
+
+<footer class="rfoot">
+  <div class="rx">
+    <div class="eyebrow">Catch Up</div>
+    <div class="m">
+      <a href="./">&larr; Interactive demo</a>
+      <a href="./pipeline.html">Product pipeline &rarr;</a>
+    </div>
+    <p class="cr">Discovery research for the Digital Product Management group assignment &middot; Syndicate 3.<br>Ten qualitative interviews, anonymised. Persona names are illustrative composites drawn from the transcripts.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- reveal on scroll ---------- */
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.rise').forEach(function(el,i){ el.style.transitionDelay=(Math.min(i%4,3)*60)+'ms'; io.observe(el); });
+})();
+
+/* ---------- count up ---------- */
+(function(){
+  var seen=new WeakSet();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting||seen.has(e.target))return; seen.add(e.target);
+    var el=e.target, target=+el.getAttribute('data-count'), t0=null, dur=900;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); el.textContent=Math.round(p*target); if(p<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });},{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el);});
+})();
+
+/* ---------- caveat toggle ---------- */
+function toggleCaveat(){var c=document.getElementById('caveat');var open=c.classList.toggle('open');c.querySelector('button').setAttribute('aria-expanded',open);}
+
+/* ---------- OPPORTUNITY ALGORITHM ---------- */
+var OPPS=[
+  {label:"Know who&rsquo;s genuinely free before I reach out",imp:9,sat:2,q:"&ldquo;It&rsquo;s exhausting organising social events purely because you don&rsquo;t know when people are available.&rdquo;",a:"Moved-away friend"},
+  {label:"Have the catch-up come to me, not me organise it",imp:8,sat:2,q:"&ldquo;I&rsquo;d want it to come to me&hellip; the app just goes: these four mates line up Thursday &mdash; and I just hit yes.&rdquo;",a:"Shift worker, 40"},
+  {label:"Ask &mdash; or be asked &mdash; without the sting of rejection",imp:8,sat:2,q:"&ldquo;You make up a whole story&hellip; add that information beforehand and you take away the inertia, then you have momentum.&rdquo;",a:"MBA student"},
+  {label:"Get enough lead time to actually make it work",imp:8,sat:3,q:"&ldquo;A same-day heads-up isn&rsquo;t much use to me&hellip; but a few days out, that&rsquo;s gold.&rdquo;",a:"Parent, 32"},
+  {label:"Stop being pre-filtered out of plans",imp:7,sat:2,q:"&ldquo;Sometimes they&rsquo;ve stopped inviting me because they assume I can&rsquo;t come&hellip; it stings, sometimes I actually could.&rdquo;",a:"Parent, 32"},
+  {label:"Keep tight control over who sees my availability",imp:8,sat:4,q:"&ldquo;Gavin can see my availability&hellip; there&rsquo;s a huge social-risk element. You can&rsquo;t really enforce the privacy.&rdquo;",a:"MBA student"},
+  {label:"Signal what kind of catch-up I&rsquo;ve got energy for",imp:7,sat:3,q:"&ldquo;Half the time when I get home I don&rsquo;t want a big night out, I just want a quiet beer.&rdquo;",a:"Shift worker, 40"},
+  {label:"A prompt to reconnect with friends who&rsquo;ve drifted",imp:7,sat:2,q:"&ldquo;I probably haven&rsquo;t seen him since November&hellip; I&rsquo;d genuinely love to, it&rsquo;s just nobody pushes the button.&rdquo;",a:"Distant friends"}
+].map(function(o){o.opp=o.imp+(o.imp-o.sat);return o;}).sort(function(a,b){return b.opp-a.opp;});
+
+(function(){
+  var host=document.getElementById('opp');
+  OPPS.forEach(function(o,i){
+    var cls=o.opp>=15?'hi':(o.opp>=13?'mid':'lo');
+    var row=document.createElement('div'); row.className='opp-row';
+    row.innerHTML=
+      '<div class="opp-top">'+
+        '<div class="opp-label">'+o.label+'</div>'+
+        '<div class="opp-score '+cls+'">'+o.opp+'<small>OPP</small></div>'+
+      '</div>'+
+      '<div class="bars">'+
+        '<div class="bar"><span class="bl">Import.</span><span class="track"><span class="fill" data-w="'+(o.imp*10)+'" style="background:var(--teal)"></span></span><span class="bv">'+o.imp+'</span></div>'+
+        '<div class="bar"><span class="bl">Satisf.</span><span class="track"><span class="fill" data-w="'+(o.sat*10)+'" style="background:var(--gold)"></span></span><span class="bv">'+o.sat+'</span></div>'+
+      '</div>'+
+      '<div class="opp-drawer"><div class="qq">'+o.q+'<div class="qa">&mdash; '+o.a+'</div></div></div>';
+    row.addEventListener('click',function(){row.classList.toggle('on');});
+    host.appendChild(row);
+  });
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.querySelectorAll('.fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});io.unobserve(e.target);}
+  });},{threshold:.35});
+  host.querySelectorAll('.opp-row').forEach(function(r){io.observe(r);});
+})();
+
+/* ---------- PERSONAS ---------- */
+var PERSONAS=[
+  {c:'var(--gold)',em:'&#129334;',seg:'Parents &amp; caregivers',who:'Mara, 33',
+   snap:'Two kids under four, partner flies for work and is away half the month, studying part-time. Every free hour is planned like a military operation.',
+   jobs:[['Functional','Spot a rare free evening early enough to arrange childcare and actually see a friend before the gap fills.'],['Emotional','Feel still included and thought-of &mdash; not quietly written off because I have kids.'],['Social','Show my friends I&rsquo;m still here and still want in.']],
+   blocker:'Her availability is real but invisible, so friends pre-filter her out assuming &ldquo;she can&rsquo;t.&rdquo; Same-day is useless &mdash; she needs several days&rsquo; notice.',
+   quotes:[['Sometimes they&rsquo;ve kind of stopped inviting me because they just assume I can&rsquo;t come&hellip; it stings a bit, because sometimes I actually could, I just need a bit of notice.','Parent, 32'],['I don&rsquo;t have the headspace to go hunting for social time&hellip; I need it to come to me and do that thinking.','Parent, 32']],
+   needs:['Proactive overlap surfaced days ahead','An activity/energy signal (&ldquo;around Friday, but make it early&rdquo;)','To be visible so friends stop assuming a no'],
+   traits:[['Plans ahead',90,'Plans','Spontaneous'],['Waits to be asked',70,'Initiates','Waits'],['Guards privacy',55,'Private','Open'],['Social battery',28,'Low','High']],
+   shape:'Lead-time-aware alerts &middot; claim-the-gap &middot; energy tags &middot; presence'},
+  {c:'var(--teal)',em:'&#9992;&#65039;',seg:'Shift workers &amp; unpredictable rosters',who:'Cam, 41',
+   snap:'Commercial pilot, away four or five days at a time, body clock wrecked, family-first when home. Wants his mates but has no bandwidth for admin.',
+   jobs:[['Functional','Do the organising for me &mdash; notice when the boys and I line up and let me fire off a plan in one tap.'],['Emotional','Keep good mateships warm without it &ldquo;doing me in.&rdquo;'],['Social','See the boys without being the one herding cats.']],
+   blocker:'The barrier is effort, not information. By the time he surfaces from a trip there are &ldquo;forty messages&rdquo; and the moment&rsquo;s gone.',
+   quotes:[['It&rsquo;s not that I don&rsquo;t know when people are free, it&rsquo;s that even the organising of the knowing is too much effort.','Shift worker, 40'],['I don&rsquo;t want to be the bloke chasing everyone up&hellip; but I&rsquo;d 100% press a button if the app did the herding for me.','Shift worker, 40']],
+   needs:['Automated match + one-tap nudge','Coarse free/busy only &mdash; private about his roster','Low-frequency, ignorable prompts'],
+   traits:[['Plans ahead',40,'Plans','Spontaneous'],['Waits to be asked',82,'Initiates','Waits'],['Guards privacy',80,'Private','Open'],['Social battery',45,'Low','High']],
+   shape:'Match-and-nudge engine &middot; one-tap send &middot; coarse privacy &middot; notification restraint'},
+  {c:'var(--violet)',em:'&#127891;',seg:'Students &amp; young professionals',who:'Ravi, 26',
+   snap:'Full-time MBA plus an internship and part-time work; his cohort is on permanently clashing schedules; recently moved cities. Was the group&rsquo;s organiser &mdash; until the no&rsquo;s wore him down.',
+   jobs:[['Functional','Spend my limited &ldquo;asking energy&rdquo; only where there&rsquo;s a real chance of a yes.'],['Emotional','Protect me from the sting &mdash; and the story I build after a no.'],['Social','Keep initiating without feeling like I&rsquo;m always the one chasing.']],
+   blocker:'Fear of repeated rejection suppresses initiation &mdash; &ldquo;asking fatigue.&rdquo; People pattern-recognise rejection and stop before they start.',
+   quotes:[['I have an energy bank of ten initiatives. I&rsquo;d use them much more efficiently knowing when I&rsquo;m asking.','MBA student'],['It kind of feels like it&rsquo;s not even worth doing it, because you&rsquo;re most likely just going to get a no.','Young professional']],
+   needs:['Certainty before asking &mdash; only surface genuine overlaps','A low-stakes ask where a no is silent','Never counted, never chased'],
+   traits:[['Plans ahead',50,'Plans','Spontaneous'],['Waits to be asked',30,'Initiates','Waits'],['Guards privacy',68,'Private','Open'],['Social battery',72,'Low','High']],
+   shape:'Availability-first &middot; silent declines &middot; low-stakes nudge framing'},
+  {c:'var(--coral)',em:'&#128506;&#65039;',seg:'Geographically distant friends',who:'Josie, 34',
+   snap:'Moved a couple of hours away; her closest friendships are now &ldquo;more digital than physical.&rdquo; A planner who batches visits and travels to see people &mdash; off most social media.',
+   jobs:[['Functional','When I&rsquo;m heading their way (or they&rsquo;re free), trigger me to lock it in and plan travel around it.'],['Emotional','Stop missing the monumental moments of people I love.'],['Social','Give me a natural prompt to reconnect &mdash; not another thing to remember.']],
+   blocker:'Infrequent contact plus no natural trigger. Organising across distance is exhausting, so it just never happens.',
+   quotes:[['I probably haven&rsquo;t seen him since November&hellip; we just couldn&rsquo;t align on a time.','Moved-away friend'],['It looks like you&rsquo;ve got nothing on this weekend &mdash; I&rsquo;m coming down &mdash; can we lock something down?','Moved-away friend, on what would help']],
+   needs:['A trigger/reminder to reconnect','Travel-aware overlap and batch-planning','Remember: &ldquo;available&rdquo; &ne; &ldquo;wants the same activity&rdquo;'],
+   traits:[['Plans ahead',85,'Plans','Spontaneous'],['Waits to be asked',45,'Initiates','Waits'],['Guards privacy',30,'Private','Open'],['Social battery',40,'Low','High']],
+   shape:'Reconnection triggers &middot; location-aware overlap &middot; activity-intent tags'},
+];
+
+(function(){
+  var host=document.getElementById('p-panels');
+  PERSONAS.forEach(function(p,i){
+    var panel=document.createElement('div');
+    panel.className='p-panel'+(i===0?' show':''); panel.id='panel-'+i; panel.setAttribute('role','tabpanel');
+    panel.setAttribute('aria-labelledby','tab-'+i); panel.style.setProperty('--pc',p.c);
+    var jobs=p.jobs.map(function(j){return '<div class="jrow"><span class="jk">'+j[0]+'</span><span>'+j[1]+'</span></div>';}).join('');
+    var quotes=p.quotes.map(function(q){return '<div class="quote"><p>'+q[0]+'</p><div class="a">&mdash; '+q[1]+'</div></div>';}).join('');
+    var needs=p.needs.map(function(n){return '<li>'+n+'</li>';}).join('');
+    var traits=p.traits.map(function(t){return '<div class="trait"><div class="tl"><span>'+t[2]+'</span><span>'+t[3]+'</span></div><div class="tt"><i style="left:'+t[1]+'%"></i></div></div>';}).join('');
+    panel.innerHTML=
+      '<div class="p-hd"><div class="seg">'+p.seg+'</div><div class="who">'+p.who+'</div><div class="snap">'+p.snap+'</div><div class="em">'+p.em+'</div></div>'+
+      '<div class="p-body">'+
+        '<div>'+
+          '<h4>Jobs to be done</h4>'+jobs+
+          '<div class="blocker"><div class="k">Primary blocker</div><p>'+p.blocker+'</p></div>'+
+        '</div>'+
+        '<div>'+
+          '<h4>In their words</h4><div class="quotes">'+quotes+'</div>'+
+          '<div class="needs"><div class="k">What they need</div><ul>'+needs+'</ul></div>'+
+        '</div>'+
+        '<div class="p-shape">'+
+          '<div style="display:grid;grid-template-columns:1fr;gap:16px">'+
+            '<div><h4 style="margin-bottom:12px">Personality signature</h4>'+traits+'</div>'+
+          '</div>'+
+          '<div class="k" style="margin-top:6px">&#9737; Shapes in the pipeline</div>'+
+          '<div class="chips">'+p.shape.split(' &middot; ').map(function(s){return '<span class="chip2">'+s+'</span>';}).join('')+'</div>'+
+        '</div>'+
+      '</div>';
+    host.appendChild(panel);
+  });
+})();
+
+function selPersona(i){
+  document.querySelectorAll('.p-tab').forEach(function(t,j){t.setAttribute('aria-selected',j===i?'true':'false');});
+  document.querySelectorAll('.p-panel').forEach(function(pn,j){pn.classList.toggle('show',j===i);});
+}
+
+/* ---------- KANO CURVE ---------- */
+(function(){
+  var svg=document.getElementById('kano-svg'); if(!svg)return;
+  var W=660,H=260,pad=58, x0=pad, y0=H-pad, xN=W-16, yT=16;
+  function P(fx,fy){return (x0+fx*(xN-x0)).toFixed(1)+','+(y0-fy*(y0-yT)).toFixed(1);}
+  var ns='http://www.w3.org/2000/svg';
+  function line(x1,y1,x2,y2,st,w,dash){var l=document.createElementNS(ns,'line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('stroke',st);l.setAttribute('stroke-width',w||1);if(dash)l.setAttribute('stroke-dasharray',dash);svg.appendChild(l);}
+  function path(d,st){var p=document.createElementNS(ns,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',st);p.setAttribute('stroke-width',2.4);p.setAttribute('stroke-linecap','round');svg.appendChild(p);}
+  function txt(x,y,s,fill,size,anchor,weight){var t=document.createElementNS(ns,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('fill',fill);t.setAttribute('font-size',size||11);t.setAttribute('font-family','IBM Plex Mono, monospace');t.setAttribute('text-anchor',anchor||'start');if(weight)t.setAttribute('font-weight',weight);t.textContent=s;svg.appendChild(t);}
+  var axis=getComputedStyle(document.body).getPropertyValue('--line')||'#ccc';
+  var mut=getComputedStyle(document.body).getPropertyValue('--faint')||'#888';
+  // quadrant axes (satisfaction vertical through middle, functionality horizontal)
+  line(x0,y0,xN,y0,axis,1.5);            // x axis (functionality)
+  line(x0,yT,x0,y0,axis,1.5);            // y axis (satisfaction) at left
+  line(x0,(yT+y0)/2,xN,(yT+y0)/2,axis,1,'4 5'); // zero satisfaction mid
+  txt(xN,y0+16,'Functionality / investment →',mut,10,'end');
+  txt(3,yT+2,'delighted',mut,10,'start');
+  txt(3,y0,'frustrated',mut,10,'start');
+  // Attractive (exponential up) - violet
+  var d='M '+P(0,.5); for(var i=0;i<=20;i++){var fx=i/20; d+=' L '+P(fx,.5+.5*Math.pow(fx,1.7));} path(d,'#6C5CE7');
+  // Performance (linear) - gold
+  path('M '+P(0,.12)+' L '+P(1,.9),'#F0A81E');
+  // Must-be (log, caps low) - teal
+  var m='M '+P(0,.02); for(var k=0;k<=20;k++){var gx=k/20; m+=' L '+P(gx,.02+.46*(1-Math.exp(-4*gx)));} path(m,'#0B7568');
+  txt(x0+(xN-x0)*.52,(y0-(.5+.5*Math.pow(.52,1.7))*(y0-yT))-13,'Attractive','#6C5CE7',11,'middle',600);
+  txt(xN-4,(y0-.9*(y0-yT))+16,'Performance','#F0A81E',11,'end',600);
+  txt(xN-4,(y0-.48*(y0-yT))+16,'Must-be','#0B7568',11,'end',600);
+})();
+
+/* ---------- COMPETITOR RADAR ---------- */
+var RADAR={
+  axes:["Discovering new people","Depth of conversation","Leads to meeting in person","Frequency of daily use","Breadth of reach","Intentional / planned","Sustains relationships","Active engagement"],
+  series:[
+    {name:"Calendar apps",color:"#8A978D",sub:"Outlook, GCal",vals:[2,3,9,6,4,10,5,7]},
+    {name:"Dating apps",color:"#E9679B",sub:"Tinder, Hinge",vals:[10,6,8,4,3,6,3,8]},
+    {name:"Social media",color:"#3B82F6",sub:"Instagram, TikTok",vals:[7,4,3,9,10,2,6,3]},
+    {name:"Messaging",color:"#22A06B",sub:"WhatsApp, Messenger",vals:[2,9,6,10,5,5,9,9]},
+    {name:"Catch Up",color:"#6C5CE7",sub:"our app",vals:[3,7,10,7,6,9,10,9]}
+  ]
+};
+(function(){
+  var svg=document.getElementById('radar'); if(!svg)return;
+  var ns='http://www.w3.org/2000/svg', cx=230, cy=230, R=150, N=RADAR.axes.length;
+  var line=getComputedStyle(document.body).getPropertyValue('--line')||'#e2e7dd';
+  var faint=getComputedStyle(document.body).getPropertyValue('--faint')||'#8A978D';
+  function pt(i,r){var ang=-Math.PI/2+i*2*Math.PI/N;return [cx+r*Math.cos(ang),cy+r*Math.sin(ang)];}
+  function el(tag,at){var e=document.createElementNS(ns,tag);for(var k in at)e.setAttribute(k,at[k]);return e;}
+  // rings
+  [.25,.5,.75,1].forEach(function(f){
+    var pts=[];for(var i=0;i<N;i++){var p=pt(i,R*f);pts.push(p[0].toFixed(1)+','+p[1].toFixed(1));}
+    svg.appendChild(el('polygon',{points:pts.join(' '),fill:'none',stroke:line,'stroke-width':1}));
+  });
+  // spokes + labels
+  for(var i=0;i<N;i++){
+    var p=pt(i,R); svg.appendChild(el('line',{x1:cx,y1:cy,x2:p[0],y2:p[1],stroke:line,'stroke-width':1}));
+    var lp=pt(i,R+24), a=lp[0]<cx-6?'end':(lp[0]>cx+6?'start':'middle');
+    var words=RADAR.axes[i].split(' '), t=el('text',{x:lp[0].toFixed(1),y:lp[1].toFixed(1),'text-anchor':a,fill:faint,'font-size':9.5,'font-family':'IBM Plex Mono, monospace'});
+    if(words.length>2){ // wrap into 2 lines
+      var half=Math.ceil(words.length/2), l1=words.slice(0,half).join(' '), l2=words.slice(half).join(' ');
+      var dy=lp[1]<cy?-4:10;
+      var s1=el('tspan',{x:lp[0].toFixed(1),dy:dy}); s1.textContent=l1; t.appendChild(s1);
+      var s2=el('tspan',{x:lp[0].toFixed(1),dy:11}); s2.textContent=l2; t.appendChild(s2);
+    } else { t.textContent=RADAR.axes[i]; }
+    svg.appendChild(t);
+  }
+  // series polygons
+  RADAR.series.forEach(function(s,si){
+    var pts=[];for(var i=0;i<N;i++){var p=pt(i,R*(s.vals[i]/10));pts.push(p[0].toFixed(1)+','+p[1].toFixed(1));}
+    var g=el('g',{'data-si':si,class:'r-series'});
+    var isCatch=(s.name==='Catch Up');
+    var poly=el('polygon',{points:pts.join(' '),fill:s.color,'fill-opacity':isCatch?.22:.12,stroke:s.color,'stroke-width':isCatch?2.6:1.6,'stroke-linejoin':'round'});
+    g.appendChild(poly);
+    if(isCatch){ for(var i=0;i<N;i++){var p=pt(i,R*(s.vals[i]/10)); g.appendChild(el('circle',{cx:p[0].toFixed(1),cy:p[1].toFixed(1),r:2.6,fill:s.color}));} }
+    g.style.transition='opacity .18s ease';
+    svg.appendChild(g);
+  });
+  // legend
+  var leg=document.getElementById('r-legend');
+  RADAR.series.forEach(function(s,si){
+    var b=document.createElement('button'); b.setAttribute('aria-pressed','true');
+    b.innerHTML='<span class="sw" style="background:'+s.color+'"></span><span class="ln">'+s.name+'</span><span class="sub">'+s.sub+'</span>';
+    b.onclick=function(){
+      var on=b.getAttribute('aria-pressed')==='true'; on=!on; b.setAttribute('aria-pressed',on?'true':'false');
+      var g=svg.querySelector('g[data-si="'+si+'"]'); if(g)g.style.opacity=on?'1':'0';
+    };
+    leg.appendChild(b);
+  });
+})();
+</script>
 </body>
 </html>
