@@ -209,6 +209,7 @@ h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(38px,5vw,52px);font-weig
   var launch=document.querySelector('.launch');
   var KEY='catchup.demo', busy=false;
   function onboarded(){ try{ return !!JSON.parse(localStorage.getItem(KEY)||'{}').state.onboarded; }catch(e){ return false; } }
+  function markSignedIn(){ try{ var o=JSON.parse(localStorage.getItem(KEY)||'{}'); o.state=o.state||{}; o.state.signedIn=true; if(o.version==null)o.version=0; localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
   function setOpen(v){ scr.classList.toggle('app-open', v); }
   function openApp(){
     if(busy) return; busy=true;
@@ -222,6 +223,7 @@ h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(38px,5vw,52px);font-weig
       if(onb){ faceid.classList.add('done'); setTimeout(function(){ faceid.classList.remove('show','scanning','done'); busy=false; },650); }
       else { launch.classList.add('reveal'); setTimeout(function(){ launch.classList.remove('show','reveal'); busy=false; },320); }
     }
+    if(onb) markSignedIn();
     frame.onload=function(){ setTimeout(reveal, Math.max(0, minT-(Date.now()-t0))); };
     frame.src=target; setOpen(true);
     setTimeout(reveal, 4500);
